@@ -1,18 +1,21 @@
 import React from "react";
-import s from './Post.module.css'
+import s from "./Post.module.css";
 
-
-const Post = () => {
-  return (
-    <div >
-      <div><img className={s.avatar} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjW5FEN8CzVwaFZVtoEWBESeiux8Bhe4_aYQ&usqp=CAU" alt="img" /></div>
-    
-      <div>
-         bla nfgn fng f 
+const Post = (props) => {
+   return (
+      <div className={s.post}>
+         {props.posts.map((p) => {
+            return (
+               <div key={p.id}>
+                  <div>
+                     <img className={s.avatar} src={p.img} alt="img" />
+                  </div>
+                  <div>{p.post}</div>
+                  <div className="like">{p.like}</div>
+               </div>
+            );
+         })}
       </div>
-      <div className="like">like</div>
-
-    </div>
-  )
-}
-export default Post
+   );
+};
+export default Post;

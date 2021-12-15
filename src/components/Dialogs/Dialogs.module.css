@@ -1,8 +1,17 @@
-.header{
-  grid-area: h;
-  background-color: aquamarine;
-
+.dialogs {
+   display: grid;
+   grid-template-columns: 2fr 10fr;
 }
-.header img {
-  width: 20px;
+
+.dialogsItem {
+   padding: 10px;
+}
+.messages {
+   padding: 10px;
+}
+.active {
+   color: darkkhaki;
+}
+a {
+   text-decoration: none;
 }
