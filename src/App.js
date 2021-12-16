@@ -9,20 +9,28 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 function App(props) {
+   // debugger;
    return (
       <BrowserRouter>
          <div className="app-wrapper">
             <Header />
             <Navbar />
+            <Sidebar data={props.state.sidebar} />
+
             <div className="content">
                <Routes>
-                  <Route path="/dialogs/*" element={<Dialogs />} />
+                  <Route
+                     path="/dialogs/*"
+                     element={<Dialogs data={props.state.dialogsPage} />}
+                  />
                   <Route
                      path="/profile"
-                     element={<Profile posts={props.posts} />}
+                     element={<Profile data={props.state.profilePage} />}
                   />
+
                   <Route path="/news" element={<News />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/music" element={<Music />} />
