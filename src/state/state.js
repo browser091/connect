@@ -61,4 +61,13 @@ const state = {
       ],
    },
 };
+
+export const addMesageState = (newMesage) => {
+   let tempMesage = {
+      id: "6",
+      mesage: newMesage,
+   };
+   state.dialogsPage.mesages.push(tempMesage);
+   console.log(state.dialogsPage.mesages);
+};
 export default state;

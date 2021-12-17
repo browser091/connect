@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 
@@ -15,6 +15,13 @@ const Mesage = (props) => {
 };
 
 const Dialogs = (props) => {
+   // debugger;
+   let msg = useRef();
+   const addMesage = () => {
+      let valueMesage = msg.current.value;
+      props.addMesageState(valueMesage);
+   };
+
    return (
       <div className={s.dialogs}>
          <div className={s.dialogsItem}>
@@ -26,6 +33,14 @@ const Dialogs = (props) => {
             {props.data.mesages.map((mesage) => (
                <Mesage key={mesage.id} mesage={mesage.mesage} />
             ))}
+            <div className="addMesage">
+               <textarea ref={msg}></textarea>
+               <div>
+                  <button onClick={addMesage} className="add">
+                     Add message
+                  </button>
+               </div>
+            </div>
          </div>
       </div>
    );

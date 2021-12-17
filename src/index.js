@@ -4,10 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import state from "./state/state";
+import { addMesageState } from "./state/state";
 
 ReactDOM.render(
    <React.StrictMode>
-      <App state={state} />
+      <App state={state} addMesageState={addMesageState} />
    </React.StrictMode>,
    document.getElementById("root")
 );
