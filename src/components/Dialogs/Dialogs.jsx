@@ -20,11 +20,11 @@ const Dialogs = (props) => {
 
    const addMesage = () => {
       let valueMesage = msg.current.value;
-      props.addMesageState(valueMesage);
+      props.store.addMesageState(valueMesage);
    };
 
    const getText = () => {
-      props.updateMessage(msg.current.value);
+      props.store.updateMessage(msg.current.value);
       console.log(msg.current.value);
    };
 

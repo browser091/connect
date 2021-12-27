@@ -1,18 +1,15 @@
-import React from "react";
+ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import state from "./state/state";
-import { addMesageState, updateMessage } from "./state/state";
+ import store from "./state/state";
 
 export const rerender = () => {
    ReactDOM.render(
       <React.StrictMode>
          <App
-            state={state}
-            addMesageState={addMesageState}
-            updateMessage={updateMessage}
+            store={store}
          />
       </React.StrictMode>,
       document.getElementById("root")
@@ -20,4 +17,5 @@ export const rerender = () => {
 
    reportWebVitals();
 };
+store.subscribe(rerender)
 rerender();

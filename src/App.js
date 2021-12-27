@@ -18,7 +18,7 @@ function App(props) {
          <div className="app-wrapper">
             <Header />
             <Navbar />
-            <Sidebar data={props.state.sidebar} />
+            <Sidebar data={props.store.state.sidebar} />
 
             <div className="content">
                <Routes>
@@ -26,15 +26,16 @@ function App(props) {
                      path="/dialogs/*"
                      element={
                         <Dialogs
-                           data={props.state.dialogsPage}
-                           addMesageState={props.addMesageState}
-                           updateMessage={props.updateMessage}
+                            store={props.store}
+                           data={props.store.state.dialogsPage}
+                           addMesageState={props.store.addMesageState}
+                           updateMessage={props.store.state.updateMessage}
                         />
                      }
                   />
                   <Route
                      path="/profile"
-                     element={<Profile data={props.state.profilePage} />}
+                     element={<Profile data={props.store.state.profilePage} />}
                   />
 
                   <Route path="/news" element={<News />} />
