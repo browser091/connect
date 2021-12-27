@@ -28,6 +28,7 @@ function App(props) {
                         <Dialogs
                            data={props.state.dialogsPage}
                            addMesageState={props.addMesageState}
+                           updateMessage={props.updateMessage}
                         />
                      }
                   />

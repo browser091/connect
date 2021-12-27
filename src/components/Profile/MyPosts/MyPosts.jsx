@@ -9,7 +9,7 @@ const MyPosts = (props) => {
          <h3> My post</h3>
          <div>
             <div>
-               <textarea></textarea>
+               <textarea value={props.newPostText} />
             </div>
             <div>
                <button>Add post</button>

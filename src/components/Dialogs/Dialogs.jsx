@@ -17,9 +17,15 @@ const Mesage = (props) => {
 const Dialogs = (props) => {
    // debugger;
    let msg = useRef();
+
    const addMesage = () => {
       let valueMesage = msg.current.value;
       props.addMesageState(valueMesage);
+   };
+
+   const getText = () => {
+      props.updateMessage(msg.current.value);
+      console.log(msg.current.value);
    };
 
    return (
@@ -34,7 +40,11 @@ const Dialogs = (props) => {
                <Mesage key={mesage.id} mesage={mesage.mesage} />
             ))}
             <div className="addMesage">
-               <textarea ref={msg}></textarea>
+               <textarea
+                  ref={msg}
+                  value={props.data.addNewMessage}
+                  onChange={getText}
+               />
                <div>
                   <button onClick={addMesage} className="add">
                      Add message

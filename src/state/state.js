@@ -1,3 +1,5 @@
+import { rerender } from "../index";
+
 const state = {
    profilePage: {
       posts: [
@@ -20,6 +22,7 @@ const state = {
             img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjW5FEN8CzVwaFZVtoEWBESeiux8Bhe4_aYQ&usqp=CAU",
          },
       ],
+      newPostText: "xaxa",
    },
    dialogsPage: {
       peoples: [
@@ -40,6 +43,7 @@ const state = {
                "Alias repellat a quo accusantium illum neque inventore cumque sequi repudiandae?",
          },
       ],
+      addNewMessage: "tutu",
    },
    sidebar: {
       friends: [
@@ -69,5 +73,11 @@ export const addMesageState = (newMesage) => {
    };
    state.dialogsPage.mesages.push(tempMesage);
    console.log(state.dialogsPage.mesages);
+   rerender();
+};
+
+export const updateMessage = (newText) => {
+   state.dialogsPage.addNewMessage = newText;
+   rerender();
 };
 export default state;
