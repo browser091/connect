@@ -10,6 +10,7 @@ import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Sidebar from "./components/Sidebar/Sidebar";
+// import store from "./state/state";
 
 function App(props) {
    // debugger;
@@ -18,24 +19,21 @@ function App(props) {
          <div className="app-wrapper">
             <Header />
             <Navbar />
-            <Sidebar data={props.store.state.sidebar} />
-
+            <Sidebar data={props.state.sidebar} />
             <div className="content">
                <Routes>
                   <Route
                      path="/dialogs/*"
                      element={
                         <Dialogs
-                            store={props.store}
-                           data={props.store.state.dialogsPage}
-                           addMesageState={props.store.addMesageState}
-                           updateMessage={props.store.state.updateMessage}
+                           data={props.state.dialogsPage}
+                           dispatch={props.dispatch}
                         />
                      }
                   />
                   <Route
                      path="/profile"
-                     element={<Profile data={props.store.state.profilePage} />}
+                     element={<Profile data={props.state.profilePage} />}
                   />
 
                   <Route path="/news" element={<News />} />

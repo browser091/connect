@@ -2,7 +2,6 @@ import React from "react";
 import css from "./Sidebar.module.css";
 
 const Sidebar = ({ data }) => {
-   console.log(data.friends);
    return (
       <div className={css.sidebar}>
          {data.friends.map((f) => (

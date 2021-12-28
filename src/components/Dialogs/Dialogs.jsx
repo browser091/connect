@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
+import {
+   addMessageStateActionCreator,
+   updateMessageActionCreator,
+} from "../../state/state";
 
 const Dialog = (props) => {
    return (
@@ -15,17 +19,15 @@ const Mesage = (props) => {
 };
 
 const Dialogs = (props) => {
-   // debugger;
    let msg = useRef();
 
    const addMesage = () => {
       let valueMesage = msg.current.value;
-      props.store.addMesageState(valueMesage);
+      props.dispatch(addMessageStateActionCreator(valueMesage));
    };
 
    const getText = () => {
-      props.store.updateMessage(msg.current.value);
-      console.log(msg.current.value);
+      props.dispatch(updateMessageActionCreator(msg.current.value));
    };
 
    return (
