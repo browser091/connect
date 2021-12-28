@@ -5,7 +5,7 @@ const Sidebar = ({ data }) => {
    return (
       <div className={css.sidebar}>
          {data.friends.map((f) => (
-            <div className={css.friend}>
+            <div key={f.id} className={css.friend}>
                <div className={css.img}>
                   <img src={f.img} alt="img" />
                </div>

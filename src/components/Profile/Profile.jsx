@@ -3,16 +3,19 @@ import s from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
+
 const Profile = (props) => {
-   // debugger;
-   return (
-      <div className={s.content}>
-         <ProfileInfo />
-         <MyPosts
-            posts={props.data.posts}
-            newPostText={props.data.newPostText}
-         />
-      </div>
-   );
+
+
+    return (
+        <div className={s.content}>
+            <ProfileInfo/>
+            <MyPosts
+                posts={props.data.posts}
+                newPostText={props.data.newPostText}
+                dispatch={props.dispatch}
+            />
+        </div>
+    );
 };
 export default Profile;

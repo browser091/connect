@@ -33,7 +33,8 @@ function App(props) {
                   />
                   <Route
                      path="/profile"
-                     element={<Profile data={props.state.profilePage} />}
+                     element={<Profile data={props.state.profilePage}
+                     dispatch={props.dispatch}/>}
                   />
 
                   <Route path="/news" element={<News />} />
