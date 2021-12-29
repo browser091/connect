@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import {
    addMessageStateActionCreator,
    updateMessageActionCreator,
-} from "../../state/state";
+} from "../../state/dialogsPageReducer";
 
 const Dialog = (props) => {
    return (
