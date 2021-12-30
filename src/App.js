@@ -4,12 +4,12 @@ import React from "react";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Sidebar from "./components/Sidebar/Sidebar";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 // import store from "./state/state";
 
 function App(props) {
@@ -25,7 +25,7 @@ function App(props) {
                   <Route
                      path="/dialogs/*"
                      element={
-                        <Dialogs
+                        <DialogsContainer store={props.store}
                            data={props.state.dialogsPage}
                            dispatch={props.dispatch}
                         />

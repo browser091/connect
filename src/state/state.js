@@ -1,7 +1,6 @@
 import dialogsPageReducer from "./dialogsPageReducer";
 import profilePageReducer from "./profilePageReducer";
 import sidebarReducer from "./sidebarReducer";
-
 const store = {
    rerender() {
       console.log("rerender");

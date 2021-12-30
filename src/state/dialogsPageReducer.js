@@ -1,14 +1,36 @@
 const ADD_MESSAGE_STATE = "ADD-MESSAGE-STATE";
 const UPDATE_MESSAGE = "UPDATE-MESSAGE";
 
-const dialogsPageReducer = (state, action) => {
+let initialState= {
+   peoples: [
+      { id: "1", name: "Igor" },
+      { id: "2", name: "Artem" },
+      { id: "3", name: "Pavel" },
+      { id: "4", name: "Vlad" },
+      { id: "5", name: "Angelina" },
+   ],
+       mesages: [
+      { id: "1", mesage: "loremc scsdc d " },
+      { id: "2", mesage: "dcdcdcdcdc" },
+      { id: "3", mesage: "Lorem ipsum dolor sit" },
+      { id: "4", mesage: "l lkiiuytu k y" },
+      {
+         id: "5",
+         mesage:
+             "Alias repellat a quo accusantium illum neque inventore cumque sequi repudiandae?",
+      },
+   ],
+       addNewMessage: "tutu",
+}
+
+const dialogsPageReducer = (state=initialState, action) => {
    switch (action.type) {
       case ADD_MESSAGE_STATE:
-         let tempMesage = {
+         let tempMessage = {
             id: Date.now(),
             mesage: action.newMesage,
          };
-         state.mesages.push(tempMesage);
+         state.mesages.push(tempMessage);
          state.addNewMessage = "";
          return state;
       case UPDATE_MESSAGE:
