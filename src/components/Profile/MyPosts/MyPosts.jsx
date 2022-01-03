@@ -1,20 +1,16 @@
 import React, { useRef } from "react";
 import s from "./MyPosts.module.css";
-import Post from "./Post/Post";
-import {
-   addPostStateActionCreator,
-   updatePostActionCreator,
-} from "../../../state/profilePageReducer";
 
 const MyPosts = (props) => {
-   // debugger;
+   //    debugger;
    let post = useRef();
    const addPost = () => {
       let valuePost = post.current.value;
-      props.dispatch(addPostStateActionCreator(valuePost));
+      props.addPost(valuePost);
    };
    const getPost = () => {
-      props.dispatch(updatePostActionCreator(post.current.value));
+      let value = post.current.value;
+      props.getPost(value);
    };
    return (
       <div className={s.myPosts}>
@@ -23,7 +19,7 @@ const MyPosts = (props) => {
             <div>
                <textarea
                   ref={post}
-                  value={props.newPostText}
+                  value={props.state.newPostText}
                   onChange={getPost}
                />
             </div>
@@ -31,7 +27,6 @@ const MyPosts = (props) => {
                <button onClick={addPost}>Add post</button>
             </div>
          </div>
-         <Post posts={props.posts} />
       </div>
    );
 };

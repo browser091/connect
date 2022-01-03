@@ -1,21 +1,20 @@
 import React from "react";
 import s from "./Profile.module.css";
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-
 const Profile = (props) => {
+   // debugger;
 
-
-    return (
-        <div className={s.content}>
-            <ProfileInfo/>
-            <MyPosts
-                posts={props.data.posts}
-                newPostText={props.data.newPostText}
-                dispatch={props.dispatch}
-            />
-        </div>
-    );
+   return (
+      <div className={s.content}>
+         <ProfileInfo />
+         <MyPostsContainer
+            store={props.store}
+            //    newPostText={props.data.newPostText}
+            //    dispatch={props.dispatch}
+         />
+      </div>
+   );
 };
 export default Profile;

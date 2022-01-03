@@ -24,19 +24,12 @@ function App(props) {
                <Routes>
                   <Route
                      path="/dialogs/*"
-                     element={
-                        <DialogsContainer store={props.store}
-                           data={props.state.dialogsPage}
-                           dispatch={props.dispatch}
-                        />
-                     }
+                     element={<DialogsContainer store={props.store} />}
                   />
                   <Route
                      path="/profile"
-                     element={<Profile data={props.state.profilePage}
-                     dispatch={props.dispatch}/>}
+                     element={<Profile store={props.store} />}
                   />
-
                   <Route path="/news" element={<News />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/music" element={<Music />} />
