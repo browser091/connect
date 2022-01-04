@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import s from "./MyPosts.module.css";
+import Post from "./Post/Post";
 
 const MyPosts = (props) => {
    //    debugger;
@@ -14,12 +15,12 @@ const MyPosts = (props) => {
    };
    return (
       <div className={s.myPosts}>
-         <h3> My post</h3>
+         <h3>My post</h3>
          <div>
             <div>
                <textarea
                   ref={post}
-                  value={props.state.newPostText}
+                  value={props.newPostText}
                   onChange={getPost}
                />
             </div>
@@ -27,6 +28,7 @@ const MyPosts = (props) => {
                <button onClick={addPost}>Add post</button>
             </div>
          </div>
+         <Post posts={props.posts} />
       </div>
    );
 };

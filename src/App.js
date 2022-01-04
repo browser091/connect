@@ -19,7 +19,7 @@ function App(props) {
          <div className="app-wrapper">
             <Header />
             <Navbar />
-            <Sidebar data={props.state.sidebar} />
+            {/* <Sidebar data={props.state.sidebar} /> */}
             <div className="content">
                <Routes>
                   <Route
