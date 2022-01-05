@@ -1,6 +1,6 @@
 const ADD_POST_STATE = "ADD_POST_STATE";
 const UPDATE_POST = "UPDATE_POST";
-let initialState ={
+let initialState = {
    posts: [
       {
          id: 1,
@@ -21,23 +21,47 @@ let initialState ={
          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjW5FEN8CzVwaFZVtoEWBESeiux8Bhe4_aYQ&usqp=CAU",
       },
    ],
-       newPostText: "xaxa",
+   newPostText: "xaxa",
 };
-const profilePageReducer = (state=initialState, action) => {
+const profilePageReducer = (state = initialState, action) => {
    switch (action.type) {
       case ADD_POST_STATE:
-         let tempPost = {
-            id: Date.now(),
-            post: action.newPost,
-            like: 28,
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjW5FEN8CzVwaFZVtoEWBESeiux8Bhe4_aYQ&usqp=CAU",
+         // let tempPost = {
+         //    id: Date.now(),
+         //    post: action.newPost,
+         //    like: 28,
+         //    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjW5FEN8CzVwaFZVtoEWBESeiux8Bhe4_aYQ&usqp=CAU",
+         // };
+         // debugger;
+
+         return {
+            ...state,
+            posts: [
+               ...state.posts,
+               {
+                  id: Date.now(),
+                  post: action.newPost,
+                  like: 28,
+                  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjW5FEN8CzVwaFZVtoEWBESeiux8Bhe4_aYQ&usqp=CAU",
+               },
+            ],
+
+            newPostText: "",
          };
-         state.posts.push(tempPost);
-         state.newPostText = "";
-         return state;
-      case UPDATE_POST:
-         state.newPostText = action.newText;
-         return state;
+      // let stateCopy = { ...state };
+      // stateCopy.posts = [...state.posts];
+      // stateCopy.posts.push(tempPost);
+      // stateCopy.newPostText = "";
+      // return stateCopy;
+      case UPDATE_POST: {
+         return {
+            ...state,
+            newPostText: action.newPostText,
+         };
+         // let stateCopy = { ...state };
+         // stateCopy.newPostText = action.newText;
+         // return stateCopy;
+      }
       default:
          return state;
    }

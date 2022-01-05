@@ -22,14 +22,8 @@ function App(props) {
             {/* <Sidebar data={props.state.sidebar} /> */}
             <div className="content">
                <Routes>
-                  <Route
-                     path="/dialogs/*"
-                     element={<DialogsContainer store={props.store} />}
-                  />
-                  <Route
-                     path="/profile"
-                     element={<Profile store={props.store} />}
-                  />
+                  <Route path="/dialogs/*" element={<DialogsContainer />} />
+                  <Route path="/profile" element={<Profile />} />
                   <Route path="/news" element={<News />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/music" element={<Music />} />

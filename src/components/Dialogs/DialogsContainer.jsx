@@ -3,7 +3,6 @@ import {
    updateMessageActionCreator,
 } from "../../state/dialogsPageReducer";
 import Dialogs from "./Dialogs";
-import React from "react";
 
 import { connect } from "react-redux";
 

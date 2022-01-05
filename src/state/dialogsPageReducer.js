@@ -1,7 +1,7 @@
 const ADD_MESSAGE_STATE = "ADD-MESSAGE-STATE";
 const UPDATE_MESSAGE = "UPDATE-MESSAGE";
 
-let initialState= {
+let initialState = {
    peoples: [
       { id: "1", name: "Igor" },
       { id: "2", name: "Artem" },
@@ -9,7 +9,7 @@ let initialState= {
       { id: "4", name: "Vlad" },
       { id: "5", name: "Angelina" },
    ],
-       mesages: [
+   mesages: [
       { id: "1", mesage: "loremc scsdc d " },
       { id: "2", mesage: "dcdcdcdcdc" },
       { id: "3", mesage: "Lorem ipsum dolor sit" },
@@ -17,25 +17,37 @@ let initialState= {
       {
          id: "5",
          mesage:
-             "Alias repellat a quo accusantium illum neque inventore cumque sequi repudiandae?",
+            "Alias repellat a quo accusantium illum neque inventore cumque sequi repudiandae?",
       },
    ],
-       addNewMessage: "tutu",
-}
+   addNewMessage: "tutu",
+};
 
-const dialogsPageReducer = (state=initialState, action) => {
+const dialogsPageReducer = (state = initialState, action) => {
    switch (action.type) {
       case ADD_MESSAGE_STATE:
-         let tempMessage = {
-            id: Date.now(),
-            mesage: action.newMesage,
+         return {
+            ...state,
+            mesages: [
+               ...state.mesages,
+               {
+                  id: Date.now(),
+                  mesage: action.newMesage,
+               },
+            ],
+            addNewMessage: "",
          };
-         state.mesages.push(tempMessage);
-         state.addNewMessage = "";
-         return state;
+
       case UPDATE_MESSAGE:
-         state.addNewMessage = action.newText;
-         return state;
+         return {
+            ...state,
+            addNewMessage: action.newText,
+         };
+
+      // let stateCopy = { ...state };
+      // stateCopy.addNewMessage = action.newText;
+      // return stateCopy;
+
       default:
          return state;
    }
