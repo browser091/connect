@@ -47,6 +47,7 @@ const Users = (props) => {
 
    return (
       <>
+         
          {props.users.map((user) => {
             return (
                <div key={user.id}>

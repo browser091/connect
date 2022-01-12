@@ -3,3 +3,7 @@
    height: 70px;
    border-radius: 50%;
 }
+.currentPage {
+   font-weight: 900;
+   color: brown;
+}
