@@ -47,7 +47,6 @@ const Users = (props) => {
 
    return (
       <>
-         
          {props.users.map((user) => {
             return (
                <div key={user.id}>
@@ -68,6 +67,7 @@ const Users = (props) => {
                   </div> */}
                   {user.follow ? (
                      <button
+                        key={Date.now()}
                         onClick={() => {
                            console.log("ee");
                            props.unfollow(user.id);
@@ -77,6 +77,7 @@ const Users = (props) => {
                      </button>
                   ) : (
                      <button
+                        key={Date.now()}
                         onClick={() => {
                            props.follow(user.id);
                         }}
