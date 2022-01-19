@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 
-import Header from "./components/Header/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/Navbar/Navbar";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -18,13 +18,17 @@ function App(props) {
    return (
       <BrowserRouter>
          <div className="app-wrapper">
-            <Header />
+            <HeaderContainer />
             <Navbar />
             {/* <Sidebar data={props.state.sidebar} /> */}
             <div className="content">
                <Routes>
                   <Route path="/dialogs/*" element={<DialogsContainer />} />
                   <Route path="/profile" element={<ProfileContainer />} />
+                  <Route
+                     path="/profile/:userId"
+                     element={<ProfileContainer />}
+                  />
                   <Route path="/news" element={<News />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/music" element={<Music />} />

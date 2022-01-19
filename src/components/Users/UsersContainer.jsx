@@ -17,7 +17,10 @@ class UsersLogic extends React.Component {
       this.props.setIsFetching(true);
       axios
          .get(
-            `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${this.props.currentPage}`
+            `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${this.props.currentPage}`,
+            {
+               withCredentials: true,
+            }
          )
          .then((response) => {
             this.props.setIsFetching(false);
@@ -33,7 +36,10 @@ class UsersLogic extends React.Component {
 
       axios
          .get(
-            `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${currentPage}`
+            `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${currentPage}`,
+            {
+               withCredentials: true,
+            }
          )
          .then((response) => {
             this.props.setIsFetching(false);

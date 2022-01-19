@@ -6,7 +6,9 @@ import tempUserPhoto from "../../assets/images/tempUserPhoto.png";
 const Users = (props) => {
    if (props.users.length === 0) {
       axios
-         .get("https://social-network.samuraijs.com/api/1.0/users")
+         .get("https://social-network.samuraijs.com/api/1.0/users", {
+            withCredentials: true,
+         })
          .then((response) => props.setUsers(response.data.items));
       //   props.setUsers([
       //      {

@@ -1,8 +1,11 @@
-.header{
-  grid-area: h;
-  background-color: aquamarine;
-
+.header {
+   grid-area: h;
+   background-color: aquamarine;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 20px;
 }
 .header img {
-  width: 20px;
+   width: 20px;
 }

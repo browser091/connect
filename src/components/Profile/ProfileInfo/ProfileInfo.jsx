@@ -16,7 +16,8 @@ const ProfileInfo = (props) => {
             <Preloader />
          ) : (
             <div className={s.description}>
-               <img src={props.profile.photos.large} alt="" /> + description
+               <img src={props.profile.photos.large} alt="" /> + description{" "}
+               USERID: {props.profile.userId}
             </div>
          )}
       </div>
