@@ -10,41 +10,6 @@ const Users = (props) => {
             withCredentials: true,
          })
          .then((response) => props.setUsers(response.data.items));
-      //   props.setUsers([
-      //      {
-      //         id: "1",
-      //         name: "Dmitri",
-      //         location: {
-      //            city: "Minsk",
-      //            country: "Belarus",
-      //         },
-      //         status: "i am good",
-      //         img: "https://cdn-icons-png.flaticon.com/512/3/3729.png",
-      //         follow: true,
-      //      },
-      //      {
-      //         id: 2,
-      //         name: "Pavel",
-      //         location: {
-      //            city: "Brest",
-      //            country: "Belarus",
-      //         },
-      //         status: "i am good",
-      //         img: "https://cdn-icons-png.flaticon.com/512/3/3729.png",
-      //         follow: false,
-      //      },
-      //      {
-      //         id: 3,
-      //         name: "Dmitri",
-      //         location: {
-      //            city: "Vitebsk",
-      //            country: "Belarus",
-      //         },
-      //         status: "i am good",
-      //         img: "https://cdn-icons-png.flaticon.com/512/3/3729.png",
-      //         follow: false,
-      //      },
-      //   ]);
    }
 
    return (
@@ -55,6 +20,7 @@ const Users = (props) => {
                   <div>{user.name}</div>
                   <div>
                      <img
+                        alt="lll"
                         className={style.avatar}
                         src={
                            user.photos.small != null
@@ -64,14 +30,10 @@ const Users = (props) => {
                      />
                   </div>
                   <div>{user.status}</div>
-                  {/* <div>
-                     {user.location.country}, {user.location.city}
-                  </div> */}
                   {user.follow ? (
                      <button
                         key={Date.now()}
                         onClick={() => {
-                           console.log("ee");
                            props.unfollow(user.id);
                         }}
                      >
