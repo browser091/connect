@@ -5,7 +5,8 @@ import tempUserPhoto from "../../assets/images/tempUserPhoto.png";
 import { userFollower } from "../api/api";
 
 const Users = (props) => {
-   let pages = Math.ceil(props.totalCount / 100 / props.count);
+   // debugger;
+   let pages = Math.ceil(props.totalCount / props.count / 100);
    let pagesArr = [];
    for (let i = 1; i <= pages; i++) {
       pagesArr.push(i);
@@ -17,14 +18,22 @@ const Users = (props) => {
             {pagesArr.map((p) =>
                p === props.currentPage ? (
                   <button
+                     // debugger
                      key={p}
-                     onClick={props.setPage}
+                     onClick={() => {
+                        props.setPage(p);
+                     }}
                      className={style.currentPage}
                   >
                      {p}
                   </button>
                ) : (
-                  <button key={p} onClick={props.setPage}>
+                  <button
+                     key={p}
+                     onClick={() => {
+                        props.setPage(p);
+                     }}
+                  >
                      {p}
                   </button>
                )
@@ -50,13 +59,13 @@ const Users = (props) => {
                   <div>{user.status}</div>
                   {user.followed ? (
                      <button
-                        // disabled={props.followingInProgress.some(
-                        //    (id) => id === user.id
-                        // )}
+                        disabled={props.followingInProgress.some(
+                           (u) => u === user.id
+                        )}
                         onClick={() => {
-                           props.setFollowingInProgress(true);
+                           props.setFollowingInProgress(true, user.id);
                            userFollower.userUnfollow(user.id).then((data) => {
-                              props.setFollowingInProgress(false);
+                              props.setFollowingInProgress(false, user.id);
                               if (data.resultCode === 0) {
                                  props.unfollow(user.id);
                               }
@@ -67,13 +76,13 @@ const Users = (props) => {
                      </button>
                   ) : (
                      <button
-                        // disabled={props.followingInProgress.some(
-                        //    (id) => id === user.id
-                        // )}
+                        disabled={props.followingInProgress.some(
+                           (u) => u === user.id
+                        )}
                         onClick={() => {
-                           props.setFollowingInProgress(true);
+                           props.setFollowingInProgress(true, user.id);
                            userFollower.userFollow(user.id).then((data) => {
-                              props.setFollowingInProgress(false);
+                              props.setFollowingInProgress(false, user.id);
                               if (data.resultCode === 0) {
                                  props.follow(user.id);
                               }

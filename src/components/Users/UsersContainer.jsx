@@ -12,7 +12,7 @@ import {
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
 import { usersAPI } from "../api/api";
-
+import axios from "axios";
 class UsersContainer extends React.Component {
    componentDidMount() {
       this.props.setIsFetching(true);
@@ -25,17 +25,25 @@ class UsersContainer extends React.Component {
          });
    }
 
-   setPage = (e) => {
-      debugger;
-      let currentPage = e.target.innerText;
-      this.props.setPage(currentPage);
+   setPage = (pageNumber) => {
+      // debugger;
+      // let currentPage = +e.target.innerText;
+      this.props.setPage(pageNumber);
       this.props.setIsFetching(true);
-      usersAPI
-         .getUsers(this.props.count, this.props.currentPage)
-         .then((data) => {
+      // usersAPI
+      //    .getUsers(this.props.count, this.props.currentPage)
+      axios
+         .get(
+            `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${pageNumber}`,
+            {
+               withCredentials: true,
+            }
+         )
+         .then((response) => {
+            // debugger;
             this.props.setIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalCount(data.totalCount);
+            this.props.setUsers(response.data.items);
+            this.props.setTotalCount(response.data.totalCount);
          });
    };
 
