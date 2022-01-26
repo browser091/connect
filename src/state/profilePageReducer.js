@@ -1,3 +1,5 @@
+import { profileAPI } from "../components/api/api";
+
 const ADD_POST_STATE = "ADD_POST_STATE";
 const UPDATE_POST = "UPDATE_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -82,5 +84,13 @@ export const updatePostActionCreator = (valueText) => {
 };
 export const setUserProfile = (profile) => {
    return { type: SET_USER_PROFILE, profile: profile };
+};
+
+export const setPrfileThunkCreator = (userId) => {
+   return (dispatch) => {
+      profileAPI.getProfileID(userId).then((data) => {
+         dispatch(setUserProfile(data));
+      });
+   };
 };
 export default profilePageReducer;

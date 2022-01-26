@@ -3,7 +3,7 @@ import s from "./Header.module.css";
 import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
-   //  debugger;
+   // debugger;
    return (
       <header className={s.header}>
          <i className="fas fa-child"></i>

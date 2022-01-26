@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const axiosSetting = axios.create({
-   withCredentials: true,
+   // withCredentials: true,
    baseURL: "https://social-network.samuraijs.com/api/1.0/",
    headers: {
-      "API-KEY": "ba77029e-63c1-4214-a13e-ef17a4a80f99",
+      // "API-KEY": "ba77029e-63c1-4214-a13e-ef17a4a80f99",
    },
 });
 
@@ -34,5 +34,11 @@ export const userFollower = {
       return axiosSetting
          .delete(`follow/${userID}`)
          .then((response) => response.data);
+   },
+};
+
+export const auth = {
+   me() {
+      return axiosSetting.get(`/auth/me`).then((response) => response.data);
    },
 };

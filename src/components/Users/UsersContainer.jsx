@@ -8,62 +8,40 @@ import {
    setPage,
    setIsFetching,
    setFollowingInProgress,
+   getUsersThunkCreator,
+   setPageThunkCreator,
+   setFollowThunkCreator,
+   setUnFollowThunkCreator,
 } from "../../state/userReducer";
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
-import { usersAPI } from "../api/api";
-import axios from "axios";
+import { Navigate } from "react-router-dom";
+
 class UsersContainer extends React.Component {
    componentDidMount() {
-      this.props.setIsFetching(true);
-      usersAPI
-         .getUsers(this.props.count, this.props.currentPage)
-         .then((data) => {
-            this.props.setIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalCount(data.totalCount);
-         });
+      this.props.getUsersThunkCreator(this.props.count, this.props.currentPage);
+      // this.props.setIsFetching(true);
+      // usersAPI
+      //    .getUsers(this.props.count, this.props.currentPage)
+      //    .then((data) => {
+      //       this.props.setIsFetching(false);
+      //       this.props.setUsers(data.items);
+      //       this.props.setTotalCount(data.totalCount);
+      //    });
    }
 
    setPage = (pageNumber) => {
-      // debugger;
-      // let currentPage = +e.target.innerText;
-      this.props.setPage(pageNumber);
-      this.props.setIsFetching(true);
-      // usersAPI
-      //    .getUsers(this.props.count, this.props.currentPage)
-      axios
-         .get(
-            `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${pageNumber}`,
-            {
-               withCredentials: true,
-            }
-         )
-         .then((response) => {
-            // debugger;
-            this.props.setIsFetching(false);
-            this.props.setUsers(response.data.items);
-            this.props.setTotalCount(response.data.totalCount);
-         });
+      this.props.setPageThunkCreator(pageNumber, this.props.count);
    };
 
    render() {
-      // debugger
+      if (!this.props.isAuth) return <Navigate to="/login" />;
       return (
          <>
             {this.props.isFetching ? (
                <Preloader />
             ) : (
-               <Users
-                  {...this.props}
-                  // totalCount={this.props.totalCount}
-                  // users={this.props.users}
-                  // unfollow={this.props.unfollow}
-                  // follow={this.props.follow}
-                  // count={this.props.count}
-                  // currentPage={this.props.currentPage}
-                  setPage={this.setPage}
-               />
+               <Users {...this.props} setPage={this.setPage} />
             )}
          </>
       );
@@ -78,6 +56,7 @@ const mapStateToProps = (state) => {
       currentPage: state.usersPage.currentPage,
       isFetching: state.usersPage.isFetching,
       followingInProgress: state.usersPage.followingInProgress,
+      isAuth: state.authUser.isAuth,
    };
 };
 
@@ -94,9 +73,13 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
    follow,
    unfollow,
-   setUsers,
-   setTotalCount,
+   // setUsers,
+   // setTotalCount,
    setPage,
-   setIsFetching,
+   // setIsFetching,
    setFollowingInProgress,
+   getUsersThunkCreator,
+   setPageThunkCreator,
+   setFollowThunkCreator,
+   setUnFollowThunkCreator,
 })(UsersContainer);

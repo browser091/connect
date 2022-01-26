@@ -63,13 +63,7 @@ const Users = (props) => {
                            (u) => u === user.id
                         )}
                         onClick={() => {
-                           props.setFollowingInProgress(true, user.id);
-                           userFollower.userUnfollow(user.id).then((data) => {
-                              props.setFollowingInProgress(false, user.id);
-                              if (data.resultCode === 0) {
-                                 props.unfollow(user.id);
-                              }
-                           });
+                           props.setUnFollowThunkCreator(user.id);
                         }}
                      >
                         Unfollow
@@ -80,13 +74,7 @@ const Users = (props) => {
                            (u) => u === user.id
                         )}
                         onClick={() => {
-                           props.setFollowingInProgress(true, user.id);
-                           userFollower.userFollow(user.id).then((data) => {
-                              props.setFollowingInProgress(false, user.id);
-                              if (data.resultCode === 0) {
-                                 props.follow(user.id);
-                              }
-                           });
+                           props.setFollowThunkCreator(user.id);
                         }}
                      >
                         Follow
