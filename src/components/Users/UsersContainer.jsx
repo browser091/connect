@@ -3,10 +3,7 @@ import Users from "./UsersClass";
 import {
    follow,
    unfollow,
-   setUsers,
-   setTotalCount,
    setPage,
-   setIsFetching,
    setFollowingInProgress,
    getUsersThunkCreator,
    setPageThunkCreator,
@@ -15,7 +12,8 @@ import {
 } from "../../state/userReducer";
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
-import { Navigate } from "react-router-dom";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class UsersContainer extends React.Component {
    componentDidMount() {
@@ -35,7 +33,7 @@ class UsersContainer extends React.Component {
    };
 
    render() {
-      if (!this.props.isAuth) return <Navigate to="/login" />;
+      // if (!this.props.isAuth) return <Navigate to="/login" />;
       return (
          <>
             {this.props.isFetching ? (
@@ -56,7 +54,7 @@ const mapStateToProps = (state) => {
       currentPage: state.usersPage.currentPage,
       isFetching: state.usersPage.isFetching,
       followingInProgress: state.usersPage.followingInProgress,
-      isAuth: state.authUser.isAuth,
+      // isAuth: state.authUser.isAuth,
    };
 };
 
@@ -70,16 +68,29 @@ const mapStateToProps = (state) => {
 //         setIsFetching: (isFetching) => dispatch(setIsFetching(isFetching))
 //     };
 // };
-export default connect(mapStateToProps, {
-   follow,
-   unfollow,
-   // setUsers,
-   // setTotalCount,
-   setPage,
-   // setIsFetching,
-   setFollowingInProgress,
-   getUsersThunkCreator,
-   setPageThunkCreator,
-   setFollowThunkCreator,
-   setUnFollowThunkCreator,
-})(UsersContainer);
+
+// let withRedirect = withAuthRedirect(UsersContainer);
+// export default connect(mapStateToProps, {
+//    follow,
+//    unfollow,
+//    setPage,
+//    setFollowingInProgress,
+//    getUsersThunkCreator,
+//    setPageThunkCreator,
+//    setFollowThunkCreator,
+//    setUnFollowThunkCreator,
+// })(withRedirect);
+
+export default compose(
+   connect(mapStateToProps, {
+      follow,
+      unfollow,
+      setPage,
+      setFollowingInProgress,
+      getUsersThunkCreator,
+      setPageThunkCreator,
+      setFollowThunkCreator,
+      setUnFollowThunkCreator,
+   }),
+   withAuthRedirect
+)(UsersContainer);

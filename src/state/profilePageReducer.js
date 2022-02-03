@@ -1,8 +1,9 @@
 import { profileAPI } from "../components/api/api";
 
 const ADD_POST_STATE = "ADD_POST_STATE";
-const UPDATE_POST = "UPDATE_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const GET_PROFILE_STATUS = "GET_PROFILE_STATUS";
+const UPDATE_PROFILE_STATUS = "UPDATE_PROFILE_STATUS";
 let initialState = {
    posts: [
       {
@@ -24,8 +25,9 @@ let initialState = {
          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjW5FEN8CzVwaFZVtoEWBESeiux8Bhe4_aYQ&usqp=CAU",
       },
    ],
-   newPostText: "xaxa",
+
    profile: null,
+   profileStatus: "",
 };
 const profilePageReducer = (state = initialState, action) => {
    switch (action.type) {
@@ -50,26 +52,30 @@ const profilePageReducer = (state = initialState, action) => {
                },
             ],
 
-            newPostText: "",
+            // newPostText: "",
          };
       // let stateCopy = { ...state };
       // stateCopy.posts = [...state.posts];
       // stateCopy.posts.push(tempPost);
       // stateCopy.newPostText = "";
       // return stateCopy;
-      case UPDATE_POST: {
-         return {
-            ...state,
-            newPostText: action.newPostText,
-         };
-         // let stateCopy = { ...state };
-         // stateCopy.newPostText = action.newText;
-         // return stateCopy;
-      }
+
       case SET_USER_PROFILE: {
          return {
             ...state,
             profile: action.profile,
+         };
+      }
+      case GET_PROFILE_STATUS: {
+         return {
+            ...state,
+            profileStatus: action.status,
+         };
+      }
+      case UPDATE_PROFILE_STATUS: {
+         return {
+            ...state,
+            profileStatus: action.status,
          };
       }
       default:
@@ -79,11 +85,19 @@ const profilePageReducer = (state = initialState, action) => {
 export const addPostStateActionCreator = (valuePost) => {
    return { type: ADD_POST_STATE, newPost: valuePost };
 };
-export const updatePostActionCreator = (valueText) => {
-   return { type: UPDATE_POST, newText: valueText };
-};
+// export const updatePostActionCreator = (valueText) => {
+//    return { type: UPDATE_POST, newText: valueText };
+// };
 export const setUserProfile = (profile) => {
    return { type: SET_USER_PROFILE, profile: profile };
+};
+export const getProfileStatus = (status) => {
+   return { type: GET_PROFILE_STATUS, status: status };
+};
+
+export const updateProfileStatus = (status) => {
+   // debugger;
+   return { type: UPDATE_PROFILE_STATUS, status: status };
 };
 
 export const setPrfileThunkCreator = (userId) => {
@@ -93,4 +107,24 @@ export const setPrfileThunkCreator = (userId) => {
       });
    };
 };
+
+export const getProfileStatusThunkCreator = (userId) => {
+   return (dispatch) => {
+      profileAPI.getProfileStatus(userId).then((data) => {
+         dispatch(getProfileStatus(data));
+         // console.log(data);
+      });
+   };
+};
+
+export const updateProfileStatusThunkCreator = (status) => {
+   // debugger;
+   return (dispatch) => {
+      profileAPI.updateProfileStatus(status).then((data) => {
+         if (data.resultCode === 0) dispatch(updateProfileStatus(status));
+         // console.log(data);
+      });
+   };
+};
+
 export default profilePageReducer;

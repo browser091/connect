@@ -1,6 +1,6 @@
 import {
    addMessageStateActionCreator,
-   updateMessageActionCreator,
+   // updateMessageActionCreator,
 } from "../../state/dialogsPageReducer";
 import Dialogs from "./Dialogs";
 
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
    return {
       addMesage: (valueMesage) =>
          dispatch(addMessageStateActionCreator(valueMesage)),
-      getText: (value) => dispatch(updateMessageActionCreator(value)),
+      // getText: (value) => dispatch(updateMessageActionCreator(value)),
    };
 };
 

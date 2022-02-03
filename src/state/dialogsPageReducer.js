@@ -20,7 +20,7 @@ let initialState = {
             "Alias repellat a quo accusantium illum neque inventore cumque sequi repudiandae?",
       },
    ],
-   addNewMessage: "tutu",
+  
 };
 
 const dialogsPageReducer = (state = initialState, action) => {
@@ -35,13 +35,7 @@ const dialogsPageReducer = (state = initialState, action) => {
                   mesage: action.newMesage,
                },
             ],
-            addNewMessage: "",
-         };
-
-      case UPDATE_MESSAGE:
-         return {
-            ...state,
-            addNewMessage: action.newText,
+           
          };
 
       // let stateCopy = { ...state };
@@ -55,7 +49,7 @@ const dialogsPageReducer = (state = initialState, action) => {
 export const addMessageStateActionCreator = (valueMesage) => {
    return { type: ADD_MESSAGE_STATE, newMesage: valueMesage };
 };
-export const updateMessageActionCreator = (valueText) => {
-   return { type: UPDATE_MESSAGE, newText: valueText };
-};
+// export const updateMessageActionCreator = (valueText) => {
+//    return { type: UPDATE_MESSAGE, newText: valueText };
+// };
 export default dialogsPageReducer;

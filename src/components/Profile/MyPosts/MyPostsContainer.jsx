@@ -1,7 +1,4 @@
-import {
-   addPostStateActionCreator,
-   updatePostActionCreator,
-} from "../../../state/profilePageReducer";
+import { addPostStateActionCreator } from "../../../state/profilePageReducer";
 import MyPosts from "./MyPosts";
 import { connect } from "react-redux";
 
@@ -24,17 +21,15 @@ import { connect } from "react-redux";
 // };
 
 const mapStateToProps = (state) => {
-   // debugger;
-
    return {
       posts: state.profilePage.posts,
       newPostText: state.profilePage.newPostText,
    };
 };
 const mapDispatchToProps = (dispatch) => {
+   // debugger;
    return {
       addPost: (valuePost) => dispatch(addPostStateActionCreator(valuePost)),
-      getPost: (value) => dispatch(updatePostActionCreator(value)),
    };
 };
 const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);

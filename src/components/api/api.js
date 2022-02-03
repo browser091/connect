@@ -4,7 +4,7 @@ const axiosSetting = axios.create({
    // withCredentials: true,
    baseURL: "https://social-network.samuraijs.com/api/1.0/",
    headers: {
-      // "API-KEY": "ba77029e-63c1-4214-a13e-ef17a4a80f99",
+      "API-KEY": "ba77029e-63c1-4214-a13e-ef17a4a80f99",
    },
 });
 
@@ -17,9 +17,19 @@ export const usersAPI = {
 };
 
 export const profileAPI = {
-   getProfileID(userId) {
+   getProfileID(userID) {
       return axiosSetting
-         .get(`profile/${userId}`)
+         .get(`profile/${userID}`)
+         .then((response) => response.data);
+   },
+   getProfileStatus(userID) {
+      return axiosSetting
+         .get(`/profile/status/${userID}`)
+         .then((response) => response.data);
+   },
+   updateProfileStatus(status) {
+      return axiosSetting
+         .put(`/profile/status`, { status: status })
          .then((response) => response.data);
    },
 };

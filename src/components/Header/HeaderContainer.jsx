@@ -8,7 +8,7 @@ import { setAuthThunkCreator } from "../../state/authReducer";
 class HeaderContainer extends React.Component {
    componentDidMount() {
       this.props.setAuthThunkCreator();
-      console.log("dwddwd");
+      // console.log("dwddwd");
    }
    render() {
       return <Header {...this.props} />;

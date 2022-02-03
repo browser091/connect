@@ -8,7 +8,11 @@ const Profile = (props) => {
 
    return (
       <div className={s.content}>
-         <ProfileInfo profile={props.profile} />
+         <ProfileInfo
+            profile={props.profile}
+            profileStatus={props.profileStatus}
+            updateProfileStatus={props.updateProfileStatusThunkCreator}
+         />
          <MyPostsContainer
             store={props.store}
             //    newPostText={props.data.newPostText}

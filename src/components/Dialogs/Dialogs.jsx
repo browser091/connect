@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import s from "./Dialogs.module.css";
+import { Form, Field } from "react-final-form";
+
 import { NavLink } from "react-router-dom";
 
 const Dialog = (props) => {
@@ -15,18 +17,9 @@ const Mesage = (props) => {
 };
 
 const Dialogs = (props) => {
-   let msg = useRef();
-
-   const addMesage = () => {
-      let valueMesage = msg.current.value;
-      props.addMesage(valueMesage);
+   const onSubmit = (value) => {
+      props.addMesage(value.newNessage);
    };
-
-   const getText = () => {
-      let valueMesage = msg.current.value;
-      props.getText(valueMesage);
-   };
-   // debugger;
    return (
       <div className={s.dialogs}>
          <div className={s.dialogsItem}>
@@ -38,20 +31,30 @@ const Dialogs = (props) => {
             {props.state.mesages.map((mesage) => (
                <Mesage key={mesage.id} mesage={mesage.mesage} />
             ))}
-            <div className="addMesage">
-               <textarea
-                  ref={msg}
-                  value={props.state.addNewMessage}
-                  onChange={getText}
-               />
-               <div>
-                  <button onClick={addMesage} className="add">
-                     Add message
-                  </button>
-               </div>
-            </div>
+            <AddMessage onSubmit={onSubmit} />
          </div>
       </div>
    );
 };
 export default Dialogs;
+
+const AddMessage = (props) => {
+   return (
+      <Form
+         onSubmit={props.onSubmit}
+         render={({ handleSubmit, pristine, form, submitting }) => (
+            <form onSubmit={handleSubmit}>
+               <Field
+                  name="newNessage"
+                  component="textarea"
+                  type="text"
+                  placeholder="Add new message"
+               />
+               <div>
+                  <button>Add message</button>
+               </div>
+            </form>
+         )}
+      />
+   );
+};
