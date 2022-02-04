@@ -1,8 +1,15 @@
 import React, { useRef } from "react";
 import s from "./Dialogs.module.css";
 import { Form, Field } from "react-final-form";
+// import Textarea from "../common/FormControl/FormControl";
 
 import { NavLink } from "react-router-dom";
+import {
+   composeValidators,
+   maxLengthCreator,
+   required,
+} from "../utilits/validator/validator";
+import { Textarea } from "../common/FormControl/FormControl";
 
 const Dialog = (props) => {
    return (
@@ -46,12 +53,14 @@ const AddMessage = (props) => {
             <form onSubmit={handleSubmit}>
                <Field
                   name="newNessage"
-                  component="textarea"
-                  type="text"
+                  component={Textarea}
                   placeholder="Add new message"
+                  validate={composeValidators(required, maxLengthCreator(10))}
                />
                <div>
-                  <button>Add message</button>
+                  <button type="submit" disabled={submitting}>
+                     Add message
+                  </button>
                </div>
             </form>
          )}

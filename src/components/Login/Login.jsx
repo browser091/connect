@@ -1,29 +1,54 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
+import { connect } from "react-redux";
+import { Input } from "../common/FormControl/FormControl";
+import {
+   composeValidators,
+   maxLengthCreator,
+   required,
+} from "../utilits/validator/validator";
+import { setLoginThunkCreator } from "../../state/authReducer";
+import { Navigate } from "react-router";
+import { FORM_ERROR } from "final-form";
 
 const LoginForm = (props) => {
+   // debugger;
    return (
       <div>
          <Form
             onSubmit={props.onSubmit}
-            render={({ handleSubmit, pristine, form, submitting }) => (
+            render={({
+               submitError,
+               handleSubmit,
+               pristine,
+               form,
+               submitting,
+            }) => (
                <form onSubmit={handleSubmit}>
                   <div>
                      <label>Login:</label>
                      <Field
-                        name="login"
-                        component="input"
+                        name="email"
+                        component={Input}
                         type="text"
                         placeholder="login"
+                        validate={composeValidators(
+                           required,
+                           maxLengthCreator(20)
+                        )}
                      />
                   </div>
                   <div>
                      <label>Password:</label>
                      <Field
                         name="password"
-                        component="input"
-                        type="text"
+                        component={Input}
+                        type="password"
                         placeholder="Password"
+                        validate={composeValidators(
+                           required,
+                           maxLengthCreator(20)
+                        )}
                      />
                   </div>
                   <div>
@@ -34,8 +59,12 @@ const LoginForm = (props) => {
                         type="checkbox"
                      />
                   </div>
+                  {console.log(submitError)}
+                  {submitError && <div className="error">{submitError}</div>}
                   <div className="buttons">
-                     <button type="submit">Submit</button>
+                     <button type="submit" disabled={submitting}>
+                        Submit
+                     </button>
                   </div>
                </form>
             )}
@@ -44,17 +73,29 @@ const LoginForm = (props) => {
    );
 };
 
-const Login = () => {
-   const onSubmit = (values) => {
-      console.log(values);
+const Login = (props) => {
+   const onSubmit = ({ email, password, rememberMe }) => {
+      props.setLoginThunkCreator(email, password, rememberMe);
+      // console.log(values);
    };
    // debugger;
    return (
       <div>
-         <h1>Login</h1>
-         <LoginForm onSubmit={onSubmit} />
+         {!props.authUser.isAuth ? (
+            <div>
+               <h1>Login</h1>
+               <LoginForm onSubmit={onSubmit} />
+            </div>
+         ) : (
+            <Navigate to="/profile" />
+         )}
       </div>
    );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+   return {
+      authUser: state.authUser,
+   };
+};
+export default connect(mapStateToProps, { setLoginThunkCreator })(Login);

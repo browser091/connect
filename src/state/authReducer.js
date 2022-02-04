@@ -1,4 +1,6 @@
 import { auth } from "../components/api/api";
+import { FORM_ERROR } from "final-form";
+import { Form, Field } from "react-final-form";
 
 const SETAUTHUSERDATA = "SETAUTHUSERDATA";
 
@@ -14,15 +16,14 @@ const authReducer = (state = initialState, action) => {
       case SETAUTHUSERDATA:
          return {
             ...state,
-            ...action.data,
-            isAuth: true,
+            ...action.payload,
          };
       default:
          return state;
    }
 };
-export const setAuthUserData = (id, email, login) => {
-   return { type: SETAUTHUSERDATA, data: { id, email, login } };
+export const setAuthUserData = (id, email, login, isAuth) => {
+   return { type: SETAUTHUSERDATA, payload: { id, email, login, isAuth } };
 };
 
 export const setAuthThunkCreator = () => {
@@ -30,7 +31,31 @@ export const setAuthThunkCreator = () => {
       auth.me().then((data) => {
          if (data.resultCode === 0) {
             let { id, login, email } = data.data;
-            dispatch(setAuthUserData(id, email, login));
+            dispatch(setAuthUserData(id, email, login, true));
+         }
+      });
+   };
+};
+export const setLoginThunkCreator = (email, password, rememberMe) => {
+   return (dispatch) => {
+      auth.login(email, password, rememberMe).then((data) => {
+         if (data.resultCode === 0) {
+            dispatch(setAuthThunkCreator());
+         } else {
+            let message =
+               data.messages.length > 0 ? data.messages[0] : "Some error";
+
+            return { [FORM_ERROR]: "message" };
+         }
+      });
+   };
+};
+
+export const setLogoutThunkCreator = () => {
+   return (dispatch) => {
+      auth.logout().then((data) => {
+         if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false));
          }
       });
    };
