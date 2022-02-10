@@ -59,7 +59,7 @@ const LoginForm = (props) => {
                         type="checkbox"
                      />
                   </div>
-                  {console.log(submitError)}
+                  {/* {console.log(submitError)} */}
                   {submitError && <div className="error">{submitError}</div>}
                   <div className="buttons">
                      <button type="submit" disabled={submitting}>

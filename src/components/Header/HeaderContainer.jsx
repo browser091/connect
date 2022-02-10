@@ -1,7 +1,5 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
-import { auth } from "../api/api";
 import { connect } from "react-redux";
 import {
    setAuthThunkCreator,
@@ -9,10 +7,6 @@ import {
 } from "../../state/authReducer";
 
 class HeaderContainer extends React.Component {
-   componentDidMount() {
-      this.props.setAuthThunkCreator();
-      // console.log("dwddwd");
-   }
    render() {
       return <Header {...this.props} />;
    }

@@ -1,14 +1,16 @@
 import { auth } from "../components/api/api";
 import { FORM_ERROR } from "final-form";
-import { Form, Field } from "react-final-form";
 
 const SETAUTHUSERDATA = "SETAUTHUSERDATA";
+const INITIALIZED_SUCSESS = "INITIALIZED_SUCSESS";
 
 let initialState = {
    id: null,
    email: null,
    login: null,
    isAuth: false,
+   initialized: false,
+   // authorizedUserId: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -18,17 +20,29 @@ const authReducer = (state = initialState, action) => {
             ...state,
             ...action.payload,
          };
+      case INITIALIZED_SUCSESS:
+         return {
+            ...state,
+            initialized: true,
+         };
       default:
          return state;
    }
 };
-export const setAuthUserData = (id, email, login, isAuth) => {
-   return { type: SETAUTHUSERDATA, payload: { id, email, login, isAuth } };
+export const setAuthUserData = (id, email, login, isAuth, authorizedUserId) => {
+   return {
+      type: SETAUTHUSERDATA,
+      payload: { id, email, login, isAuth, authorizedUserId },
+   };
+};
+
+export const setInitializedSuccsess = () => {
+   return { type: INITIALIZED_SUCSESS };
 };
 
 export const setAuthThunkCreator = () => {
    return (dispatch) => {
-      auth.me().then((data) => {
+      return auth.me().then((data) => {
          if (data.resultCode === 0) {
             let { id, login, email } = data.data;
             dispatch(setAuthUserData(id, email, login, true));
@@ -44,7 +58,6 @@ export const setLoginThunkCreator = (email, password, rememberMe) => {
          } else {
             let message =
                data.messages.length > 0 ? data.messages[0] : "Some error";
-
             return { [FORM_ERROR]: "message" };
          }
       });
@@ -58,6 +71,12 @@ export const setLogoutThunkCreator = () => {
             dispatch(setAuthUserData(null, null, null, false));
          }
       });
+   };
+};
+export const setInitializedSuccsessThunkCreator = () => {
+   return (dispatch) => {
+      const promise = dispatch(setAuthThunkCreator());
+      Promise.all([promise]).then(() => dispatch(setInitializedSuccsess()));
    };
 };
 

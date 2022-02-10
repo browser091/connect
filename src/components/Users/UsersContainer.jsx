@@ -14,6 +14,14 @@ import React from "react";
 import Preloader from "../common/Preloader/Preloader";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import {
+   getCount,
+   getCurrentPage,
+   getFollowingInProgress,
+   getIsFetching,
+   getTotalCount,
+   getUsers,
+} from "../../state/users-selectors";
 
 class UsersContainer extends React.Component {
    componentDidMount() {
@@ -39,7 +47,7 @@ class UsersContainer extends React.Component {
             {this.props.isFetching ? (
                <Preloader />
             ) : (
-               <Users {...this.props} setPage={this.setPage} />
+               <Users {...this.props} setPage={this.setPage}  />
             )}
          </>
       );
@@ -48,12 +56,12 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
    return {
-      users: state.usersPage.users,
-      totalCount: state.usersPage.totalCount,
-      count: state.usersPage.count,
-      currentPage: state.usersPage.currentPage,
-      isFetching: state.usersPage.isFetching,
-      followingInProgress: state.usersPage.followingInProgress,
+      users: getUsers(state),
+      totalCount: getTotalCount(state),
+      count: getCount(state),
+      currentPage: getCurrentPage(state),
+      isFetching: getIsFetching(state),
+      followingInProgress: getFollowingInProgress(state),
       // isAuth: state.authUser.isAuth,
    };
 };
@@ -91,6 +99,5 @@ export default compose(
       setPageThunkCreator,
       setFollowThunkCreator,
       setUnFollowThunkCreator,
-   }),
-   withAuthRedirect
+   })
 )(UsersContainer);

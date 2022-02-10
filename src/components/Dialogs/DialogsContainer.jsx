@@ -5,6 +5,8 @@ import {
 import Dialogs from "./Dialogs";
 
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 // const DialogsContainer = (props) => {
 //    let state = props.store.getState().dialogsPage;
@@ -32,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
       // getText: (value) => dispatch(updateMessageActionCreator(value)),
    };
 };
-
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-export default DialogsContainer;
+export default compose(
+   connect(mapStateToProps, mapDispatchToProps),
+   withAuthRedirect
+)(Dialogs);
