@@ -52,13 +52,14 @@ export const setAuthThunkCreator = () => {
 };
 export const setLoginThunkCreator = (email, password, rememberMe) => {
    return (dispatch) => {
-      auth.login(email, password, rememberMe).then((data) => {
+     return auth.login(email, password, rememberMe).then((data) => {
          if (data.resultCode === 0) {
             dispatch(setAuthThunkCreator());
          } else {
-            let message =
-               data.messages.length > 0 ? data.messages[0] : "Some error";
-            return { [FORM_ERROR]: "message" };
+            // debugger
+             let message =data.messages.length > 0 ? data.messages[0] : "Some error";
+            return {[FORM_ERROR]:message}
+            // return console.log(message)
          }
       });
    };
