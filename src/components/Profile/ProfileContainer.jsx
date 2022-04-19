@@ -9,22 +9,26 @@ import {
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 import { withRouter } from "../../hoc/withRouter";
-import { useNavigate } from "react-router-dom";
 
 class ProfileContainer extends React.Component {
-   componentDidMount() {
-      // debugger;
+   refreshUserId = () => {
       let userId = this.props.userId;
       if (!userId) {
          userId = this.props.authorizedUserId;
       }
       this.props.setPrfileThunkCreator(userId);
       this.props.getProfileStatusThunkCreator(userId);
+   };
+   componentDidMount() {
+      this.refreshUserId();
    }
+   componentDidUpdate(prevProps, prevState) {
+      if (prevProps.userId != this.props.userId) {
+         this.refreshUserId();
+      }
+   }
+
    render() {
-      // if (!this.props.userId) {
-      //    useNavigate("/login");
-      // }
       return <Profile {...this.props} />;
    }
 }
