@@ -21,7 +21,7 @@ const ProfileInfo = (props) => {
                   <img className={s.avatar} src={avatar} />
                )}
                <br />
-               <input type="file" />
+               <input type="file" onChange={props.submitImg} />
                <br />
                <ProfileStatus
                   updateProfileStatus={props.updateProfileStatus}

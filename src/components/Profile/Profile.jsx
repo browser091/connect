@@ -9,6 +9,7 @@ const Profile = (props) => {
    return (
       <div className={s.content}>
          <ProfileInfo
+            submitImg={props.submitImg}
             profile={props.profile}
             profileStatus={props.profileStatus}
             updateProfileStatus={props.updateProfileStatusThunkCreator}

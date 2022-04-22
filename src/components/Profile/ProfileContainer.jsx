@@ -27,9 +27,12 @@ class ProfileContainer extends React.Component {
          this.refreshUserId();
       }
    }
+   submitImg = () => {
+      console.log("submit Img");
+   };
 
    render() {
-      return <Profile {...this.props} />;
+      return <Profile {...this.props} submitImg={this.submitImg} />;
    }
 }
 

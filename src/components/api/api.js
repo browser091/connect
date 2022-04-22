@@ -32,6 +32,15 @@ export const profileAPI = {
          .put(`/profile/status`, { status: status })
          .then((response) => response.data);
    },
+   submitImg(imgFile) {
+      const formData = new FormData();
+      formData.append("image", imgFile);
+      return axiosSetting.put(`/profile/photo`, formData, {
+         headers: {
+            "Content-Type": "multipart/form-data",
+         },
+      });
+   },
 };
 
 export const userFollower = {
